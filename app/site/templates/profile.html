@@ -1,0 +1,42 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='mystyle.css')}}">
+<script src="{{url_for('static', filename='script.js')}}"></script>
+{% endblock %}
+
+{% block body %}
+<body>
+
+
+<div>
+  <h3>Your Recipe Bank</h3>
+  <h2>Hello {{user.name}}!</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Recipe</th>
+      <th>Serving Size</th>
+      <th>Time</th>
+    </tr>
+    {% for r in recipes %}
+    <tr>
+      <td><a></a></td>
+      <td></td>
+      <td></td>
+    </tr>
+    {% endfor %}
+  </table>
+
+</div>
+
+<br>
+<button class="button"><a href="{{url_for('logout')}}">Logout</a></button>
+
+
+</body>
+
+
+
+{% endblock %}
