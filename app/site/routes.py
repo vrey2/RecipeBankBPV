@@ -4,6 +4,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
+from flask_sqlalchemy import SQLAlchemy
 
 site = Blueprint('site', __name__, template_folder='templates')
 
@@ -21,10 +22,15 @@ def login():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        # new_pass = bcrypt.gensalt(form.password.data)
-        # new_user = User(username=form.username.data, password=new_pass)
+        new_pass = bcrypt.gensalt(form.password.data)
+        new_user = User(username=form.username.data, password=new_pass)
+
         return render_template('site/login.html')
     return render_template('site/register.html', form=form)
+class User(db.Model, UserMixin):
+    id = db.Column('id', db.Integer, primary_key=True)
+    username = db.Column('username', db.String(20), unique=True)
+    password = db.Column('password', db.String(20))
 
 class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
