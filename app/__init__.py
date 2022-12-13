@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
+from flask_sqlalchemy import SQLAlchemy
 
 # from app.api.routes import api
 from app.site.routes import site
@@ -10,6 +11,12 @@ from app.models import User
 def booty(app):
     boot = Bootstrap(app)
     return boot
+
+def data(app):
+    db = SQLAlchemy(app)
+    db.init_app(app)
+    db.create_all()
+    return db
 
 def create_app():
     app = Flask(__name__,template_folder='./site/templates',static_folder='./site/static')
@@ -39,3 +46,7 @@ def create_app():
 
     return app
 
+if __name__ == '__main__':
+    app = create_app()
+    data(app)
+    app.run(debug=True)

@@ -33,6 +33,10 @@ def register():
         form_1 = LoginForm()
         return render_template('site/login.html', form=form_1)
     return render_template('site/register.html', form=form)
+class User(db.Model, UserMixin):
+    id = db.Column('id', db.Integer, primary_key=True)
+    username = db.Column('username', db.String(20), unique=True)
+    password = db.Column('password', db.String(20))
 
 @site.route('/logout', methods=['GET', 'POST'])
 def logout():
