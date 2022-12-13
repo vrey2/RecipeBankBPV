@@ -9,8 +9,7 @@ def booty(app):
     return boot
 
 def data(app):
-
-
+    ...
 def create_app():
     app = Flask(__name__)
 
