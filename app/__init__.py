@@ -2,12 +2,13 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
-# from app.api.routes import api
+from app.api.routes import api
 from app.site.routes import site
 from app.admin.routes import admin
 
 from app.extensions import db, logMan, bcrypt
 from app.models import User
+
 def booty(app):
     boot = Bootstrap(app)
     return boot
@@ -23,7 +24,7 @@ def create_app():
 
     booty(app)
 
-    # app.register_blueprint(api)
+    app.register_blueprint(api)
     app.register_blueprint(site)
     app.register_blueprint(admin)
 
