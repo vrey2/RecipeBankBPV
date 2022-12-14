@@ -11,7 +11,37 @@
     <h1>The Recipe Bank!</h1>
     <h2>Hello {{user.name}}!</h2>
 
-    <a href="{{ url_for('logout') }}">Logout</a><br>
+    <a href="{{ url_for('site.logout') }}">Logout</a><br>
+
+    <div>
+    <br><hr>
+    <!--This is placeholder! Needs bootstrap fun-->
+    This is a test!
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Serves</th>
+            <th>Prep Time</th>
+            <th>Cook Time</th>
+            <th>Ingredients</th>
+            <th>Instructions</th>
+            <th>Time</th>
+            <th>Author</th>
+        </tr>
+        {% for items in items %}
+        <tr>
+            <td>{{ items.name }}</td>
+            <td>{{ items.serve }}</td>
+            <td>{{ items.prep }}</td>
+            <td>{{ items.cook }}</td>
+            <td>{{ items.ingr }}</td>
+            <td>{{ items.instr }}</td>
+            <td>{{ items.time }}</td>
+            <td>{{ items.author }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
 
 
 </body>

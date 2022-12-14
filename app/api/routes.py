@@ -11,8 +11,8 @@ api = Blueprint('api', __name__, url_prefix='/api')
 
 @api.route('/getrecipes')
 def getrecipes():
-    recipes = db.session.execute(db.select(Recipe).order_by(Recipe.id)).scalars()
-    return recipes.all()
+    recipes = db.session.execute(db.select(Recipe).order_by(Recipe.id)).scalars().all()
+    return recipes
 
 @api.route('/getuserrecipes/<username>')
 def getuserrecipes(username):

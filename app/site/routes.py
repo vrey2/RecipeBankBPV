@@ -6,9 +6,10 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt, generate_password_hash
 from flask_login import logout_user, login_required, current_user, login_user
+
+from app.api.routes import getrecipes
 from app.extensions import db, logMan, bcrypt
 from app.models import User
-
 site = Blueprint('site', __name__, template_folder='templates')
 
 @site.route('/', methods=['GET', 'POST'])
@@ -48,7 +49,7 @@ def logout():
 @site.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
-    return render_template('site/home.html')
+    return render_template('site/home.html', user=current_user, items=getrecipes())
 
 @site.route('/profile', methods=['GET', 'POST', 'PUT'])
 @login_required
