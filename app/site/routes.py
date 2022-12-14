@@ -39,6 +39,14 @@ def logout():
     form = LoginForm()
     return render_template('site/login.html', form=form)
 
+@site.route('/home', methods=['GET', 'POST'])
+def home():
+    return render_template('site/home.html')
+
+@site.route('/profile', methods=['GET', 'POST', 'PUT'])
+def profile():
+    return render_template('site/profile.html')
+
 @logMan.user_loader
 def load_user(user_id):
     user = User.query.get_id(int(user_id))
