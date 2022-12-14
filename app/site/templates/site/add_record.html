@@ -1,0 +1,58 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+<!--<script src="{{url_for('static', filename='script.js')}}"></script>-->
+{% endblock %}
+
+{% block body %}
+<body>
+
+
+<div>
+  <h3>Your Recipe Bank</h3>
+  <h2>Hello {{current_user.username}}!</h2>
+		{% if message %}
+
+			<!-- the form was submitted and message exists -->
+			<p class="lead"><strong>{{ message }}</strong></p>
+
+			<!-- links -->
+			<p><a href="{{ url_for('site.add_record') }}">Submit another recipe.</a></p>
+
+			<p><a href="{{ url_for('site.home') }}">Return to the Home.</a></p>
+
+		{% endif %}
+
+		<form method="POST" action="/add_record">
+        {{ form1.hidden_tag() }}
+        Recipe Name: {{ (form1.name) }}
+        <br>
+        Serving size: {{ (form1.serve) }}
+        <br>
+        Prep Time: {{ (form1.prep) }}
+		<br>
+		Cooking Time: {{ (form1.cook) }}
+        <br>
+        Ingredients: {{ (form1.ingr) }}
+        <br>
+        Instructions: {{ (form1.instr) }}
+		<br>
+		Time to complete: {{ (form1.time) }}
+		<br>
+		Author: {{ (form1.author) }}
+		<br>{{ (form1.submit) }}
+    </form>
+
+
+</div>
+
+<br>
+<button class="button"><a href="{{url_for('site.home')}}">Home</a></button>
+<br>
+<button class="button"><a href="{{ url_for('site.logout') }}">Logout</a></button>
+
+</body>
+
+{% endblock %}
