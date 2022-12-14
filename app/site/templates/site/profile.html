@@ -12,22 +12,31 @@
 
 <div>
   <h3>Your Recipe Bank</h3>
-  <h2>Hello {{user.username}}!</h2>
-  <table>
-    <thead>
-    <tr>
-      <th>Recipe</th>
-      <th>Serving Size</th>
-      <th>Time</th>
-    </tr>
-    {% for r in recipes %}
-    <tr>
-      <td><a></a></td>
-      <td></td>
-      <td></td>
-    </tr>
-    {% endfor %}
-  </table>
+  <h2>Hello {{current_user.username}}!</h2>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Serves</th>
+            <th>Prep Time</th>
+            <th>Cook Time</th>
+            <th>Ingredients</th>
+            <th>Instructions</th>
+            <th>Time</th>
+            <th>Author</th>
+        </tr>
+        {% for items in items %}
+        <tr>
+            <td>{{ items.name }}</td>
+            <td>{{ items.serve }}</td>
+            <td>{{ items.prep }}</td>
+            <td>{{ items.cook }}</td>
+            <td>{{ items.ingr }}</td>
+            <td>{{ items.instr }}</td>
+            <td>{{ items.time }}</td>
+            <td>{{ items.author }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 
 </div>
 

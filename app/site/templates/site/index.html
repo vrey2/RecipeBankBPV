@@ -1,0 +1,17 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+<!--<script src="{{url_for('static', filename='script.js')}}"></script>-->
+{% endblock %}
+
+{% block body %}
+<body>
+    <h1>Welcome to The Recipe Bank!</h1>
+    <a href="{{url_for('site.login')}}">Log in here!</a>
+    <br>
+    <a href="{{ url_for('site.register') }}">Don't have an account? Sign Up</a>
+
+</body>
+{% endblock %}
