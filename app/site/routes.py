@@ -1,6 +1,3 @@
-----/sites/routes-----
-
-
 from flask import Blueprint, render_template, url_for,redirect
 from flask_wtf import FlaskForm, form
 from flask_sqlalchemy import SQLAlchemy, query
