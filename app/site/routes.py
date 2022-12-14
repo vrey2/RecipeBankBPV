@@ -1,3 +1,4 @@
+import flask_login
 from flask import Blueprint, render_template, url_for,redirect
 from flask_wtf import FlaskForm, form
 from flask_sqlalchemy import SQLAlchemy, query
@@ -16,9 +17,14 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        return render_template('site/home.html', user=user)
-
-    return render_template('site/login.html', form=form)
+        if user:
+            if user.password == form.password.data:
+                login_user(user)
+                return redirect('site.home', user=user)
+    else:
+        form = LoginForm()
+        return render_template('site/login.html', form=form)
+    return render_template('site/home.html', form=form)
 
 @site.route('/register', methods=['GET', 'POST'])
 def register():
@@ -33,23 +39,22 @@ def register():
     return render_template('site/register.html', form=form)
 
 @site.route('/logout', methods=['GET', 'POST'])
+@login_required
 def logout():
     logout_user()
     form = LoginForm()
     return render_template('site/login.html', form=form)
 
 @site.route('/home', methods=['GET', 'POST'])
+@login_required
 def home():
     return render_template('site/home.html')
 
 @site.route('/profile', methods=['GET', 'POST', 'PUT'])
+@login_required
 def profile():
     return render_template('site/profile.html')
 
-@logMan.user_loader
-def load_user(user_id):
-    user = User.query.get_id(int(user_id))
-    return user
 
 class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
