@@ -2,6 +2,7 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
+
 from app.api.routes import api
 from app.site.routes import site
 from app.admin.routes import admin
@@ -38,7 +39,17 @@ def create_app():
     bcrypt.init_app(app)
     #login manager
     logMan.init_app(app)
-    logMan.login_view = 'site.login'
+    logMan.login_view = 'site.home'
+
+    @logMan.user_loader
+    def load_user(user_id):
+        x = User.query.get(int(user_id))
+        return x
+        # x = db.session.execute(User.query.get(int(user_id)))
+        # y = db.session.execute(User.query.filter_by(id=x).first())
+        # z = db.session.execute(filter(User, y)).get_id()
+        #
+        # return m
 
     # thios is only here cause i was testing. this makes DB but does not build.
     with app.app_context():
