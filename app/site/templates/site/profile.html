@@ -13,6 +13,8 @@
 <div>
   <h3>Your Recipe Bank</h3>
   <h2>Hello {{current_user.username}}!</h2>
+    <a href="{{url_for('site.add_record')}}">ADD A RECORD!</a>
+        <br>
     {% for items in items %}
         <div class="box">
             <h3>Name</h3>
