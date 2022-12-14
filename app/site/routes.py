@@ -8,6 +8,7 @@ from flask_bcrypt import Bcrypt, generate_password_hash
 from flask_login import logout_user, login_required, current_user, login_user
 from app.extensions import db, logMan, bcrypt
 from app.models import User
+from app.api.routes import api
 
 site = Blueprint('site', __name__, template_folder='templates')
 
@@ -41,11 +42,21 @@ def logout():
 
 @site.route('/home', methods=['GET', 'POST'])
 def home():
+
     return render_template('site/home.html')
 
 @site.route('/profile', methods=['GET', 'POST', 'PUT'])
 def profile():
-    return render_template('site/profile.html')
+    getrecipes()
+    return render_template('site/profile.html', user=user)
+
+@site.route('/getrecipes')
+def getrecipes():
+    return 'hello world'
+
+@site.route('/myrecipes', methods=['GET', 'POST', 'PUT'])
+def myrecipes():
+    return 'here are the recipes'
 
 @logMan.user_loader
 def load_user(user_id):
