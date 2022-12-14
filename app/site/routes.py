@@ -1,8 +1,7 @@
 
 from flask import Blueprint, render_template, url_for,redirect
 from flask_wtf import FlaskForm, form
-from flask_sqlalchemy import SQLAlchemy, query, session
-from sqlalchemy import select
+from flask_sqlalchemy import SQLAlchemy, query
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt, generate_password_hash
@@ -19,8 +18,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        login_user(user)
-        return redirect(url_for('.home', user=user))
+        return render_template('site/home.html', user=user)
 
     return render_template('site/login.html', form=form)
 
@@ -37,21 +35,20 @@ def register():
     return render_template('site/register.html', form=form)
 
 @site.route('/logout', methods=['GET', 'POST'])
-@login_required
 def logout():
     logout_user()
     form = LoginForm()
     return render_template('site/login.html', form=form)
 
 @site.route('/home', methods=['GET', 'POST'])
-@login_required
 def home():
-    return render_template('site/home.html', user=current_user)
+
+    return render_template('site/home.html')
 
 @site.route('/profile', methods=['GET', 'POST', 'PUT'])
-@login_required
 def profile():
-    return render_template('site/profile.html', user=current_user)
+
+    return render_template('site/profile.html', user=user)
 
 @site.route('/getrecipes')
 def getrecipes():
@@ -63,9 +60,8 @@ def myrecipes():
 
 @logMan.user_loader
 def load_user(user_id):
-
-    # db.session.execute(db.select(User).filter_by(id=i))
-    return User.query.get_id(int(user_id))
+    user = User.query.get_id(int(user_id))
+    return user
 
 class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
