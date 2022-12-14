@@ -14,6 +14,12 @@ def getrecipes():
     recipes = db.session.execute(db.select(Recipe).order_by(Recipe.id)).scalars()
     return recipes.all()
 
+@api.route('/getuserrecipes/<username>')
+def getuserrecipes(username):
+    recipes = db.session.execute(db.select(Recipe).filter(Recipe.author == username)).scalars()
+    return recipes.all()
+
+
 @api.route('/buildFakeDB')
 def buildFakeDB():
     mike1 = User(username=fake.first_name(), password=fake.ssn())
