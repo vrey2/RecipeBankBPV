@@ -2,7 +2,7 @@
 
 {% block styles %}
 {{super()}}
-<!--<link rel="stylesheet" href="{{url_for('static', filename='mystyle.css')}}">-->
+<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 <!--<script src="{{url_for('static', filename='script.js')}}"></script>-->
 {% endblock %}
 
@@ -32,8 +32,9 @@
 </div>
 
 <br>
-<button class="button"><a href="{{url_for('logout')}}">Logout</a></button>
-
+<button class="button"><a href="{{url_for('site.home')}}">Home</a></button>
+<br>
+<button class="button"><a href="{{ url_for('site.logout') }}">Logout</a></button>
 
 </body>
 

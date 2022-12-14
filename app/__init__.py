@@ -12,7 +12,7 @@ def booty(app):
     return boot
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__,template_folder='./site/templates',static_folder='./site/static')
 
     booty(app)
 

@@ -47,7 +47,7 @@ def home():
 
 @site.route('/profile', methods=['GET', 'POST', 'PUT'])
 def profile():
-    getrecipes()
+
     return render_template('site/profile.html', user=user)
 
 @site.route('/getrecipes')
