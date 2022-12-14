@@ -12,7 +12,6 @@
 
     <h1>The Recipe Bank!</h1>
     <h2>Hello <a href="{{url_for('site.profile')}}">{{current_user.username}}!</a></h2>
-
     <button class="button"><a href="{{ url_for('site.logout') }}">Logout</a><br></button>
     <div>
         {% for items in items %}

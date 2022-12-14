@@ -7,81 +7,56 @@
 {% endblock %}
 
 {% block body %}
+
 <body>
 
+    <h3>Your Recipe Bank</h3>
+    <h2>Hello {{current_user.username}}!</h2>
+    <button class="button"><a href="{{url_for('site.add_record')}}">ADD A RECORD!</a></button>
+    <br>
+    <button class="button"><a href="{{url_for('site.home')}}">Home</a></button>
+    <br>
+    <button class="button"><a href="{{ url_for('site.logout') }}">Logout</a></button>
+    <br><hr>
+        <div>
+        {% for items in items %}
+            <div class="box">
+                <h3>Name</h3>
+                <p>{{ items.name }}</p>
+                <br>
+                <h3>Serves</h3>
+                <p>{{ items.serve }}</p>
+                <br>
+                <h3>Prep Time</h3>
+                <p>{{ items.prep }}</p>
+                <br>
+                <h3>Cook Time</h3>
+                <p>{{ items.cook }}</p>
+                <br>
+                <h3>Ingredients</h3>
+                <p>{{ items.ingr }}</p>
+                <br>
+                <h3>Instructions</h3>
+                <p>{{ items.instr }}</p>
+                <br>
+                <h3>Time</h3>
+                <p>{{ items.time }}</p>
+                <br>
+                <h3>Author</h3>
+                <p>{{ items.author }}</p>
+                <br>
+            </div>
+            {% endfor %}
 
-<div>
-  <h3>Your Recipe Bank</h3>
-  <h2>Hello {{current_user.username}}!</h2>
-    <a href="{{url_for('site.add_record')}}">ADD A RECORD!</a>
-        <br>
-    {% for items in items %}
-        <div class="box">
-            <h3>Name</h3>
-            <p>{{ items.name }}</p>
-            <br>
-            <h3>Serves</h3>
-            <p>{{ items.serve }}</p>
-            <br>
-            <h3>Prep Time</h3>
-            <p>{{ items.prep }}</p>
-            <br>
-            <h3>Cook Time</h3>
-            <p>{{ items.cook }}</p>
-            <br>
-            <h3>Ingredients</h3>
-            <p>{{ items.ingr }}</p>
-            <br>
-            <h3>Instructions</h3>
-            <p>{{ items.instr }}</p>
-            <br>
-            <h3>Time</h3>
-            <p>{{ items.time }}</p>
-            <br>
-            <h3>Author</h3>
-            <p>{{ items.author }}</p>
-            <br>
-        </div>
-        {% endfor %}
+
+
+
+    </div>
 
 
 
 
-
-<!--    <table class="table">-->
-<!--        <tr>-->
-<!--            <th>Name</th>-->
-<!--            <th>Serves</th>-->
-<!--            <th>Prep Time</th>-->
-<!--            <th>Cook Time</th>-->
-<!--            <th>Ingredients</th>-->
-<!--            <th>Instructions</th>-->
-<!--            <th>Time</th>-->
-<!--            <th>Author</th>-->
-<!--        </tr>-->
-<!--        {% for items in items %}-->
-<!--        <tr>-->
-<!--            <td>{{ items.name }}</td>-->
-<!--            <td>{{ items.serve }}</td>-->
-<!--            <td>{{ items.prep }}</td>-->
-<!--            <td>{{ items.cook }}</td>-->
-<!--            <td>{{ items.ingr }}</td>-->
-<!--            <td>{{ items.instr }}</td>-->
-<!--            <td>{{ items.time }}</td>-->
-<!--            <td>{{ items.author }}</td>-->
-<!--        </tr>-->
-<!--        {% endfor %}-->
-<!--    </table>-->
-
-</div>
-
-<br>
-<button class="button"><a href="{{url_for('site.home')}}">Home</a></button>
-<br>
-<button class="button"><a href="{{ url_for('site.logout') }}">Logout</a></button>
 
 </body>
-
-
 
 {% endblock %}
